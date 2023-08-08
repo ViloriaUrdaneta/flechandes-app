@@ -10,10 +10,24 @@ interface AppState {
     flete: Array<Flete>
 }
 
-export default function page() {
+export default function FormPage() {
 
     //const [fletes, setFletes] = useState<AppState["flete"]>([])
+    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
+    useEffect(() => {
+        const handleResize = () => {
+            const windowHeigt = window.innerHeight;
+            const bodyHeight = document.body.clientHeight;
+            const keyboardThreshold = 100;
+            const isKeyboard = windowHeigt + keyboardThreshold < bodyHeight;
+            setIsKeyboardVisible(isKeyboard);
+        };
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    },[])
 
     const handleNewFlete = (newFlete: Flete): void => {
         //setFletes(fletes => [...fletes, newFlete])
@@ -29,7 +43,7 @@ export default function page() {
                 <SecondaryButton>Mudanzas</SecondaryButton>
             </div>
             <Form onNewFlete={handleNewFlete}/>
-            <Tapbar/>
+            { isKeyboardVisible ? (<></>) : (<Tapbar/>)}
         </div>
     )
 }
