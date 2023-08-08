@@ -1,5 +1,7 @@
 //import useNewFleteForm from '../hooks/useNewFleteForm';
+import React, { useState } from 'react';
 import { Flete } from '../types';
+import Modal from './Modal';
 import "./module.css";
 
 
@@ -11,6 +13,11 @@ interface FormProps {
 function Form({onNewFlete}: FormProps) {
 
     //const [inputValues, dispatch] = useNewFleteForm()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsModalOpen(true);
+        console.log('clic')
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,7 +45,7 @@ function Form({onNewFlete}: FormProps) {
             <form onSubmit={handleSubmit} className='flex flex-col gap-3 text-black'>
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='origen' placeholder='Origen de carga' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='destino' placeholder='Destino de carga' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
+                <input onChange={handleChange} onClick={handleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
@@ -54,6 +61,9 @@ function Form({onNewFlete}: FormProps) {
                 <p className='font-bold text-xs'>Cobertura del 100% del valor de tu carga en caso de daño o perdida</p>
                 <button onClick={handleClear} type='submit' className='lex items-center w-80 rounded-lg shadow-lg p-3 font-bold bg-sky-500 text-white drop-shadow-lg'>Publicar</button>
             </form>
+            {isModalOpen && (
+                <Modal/>
+            )}
         </div>
     )
 }

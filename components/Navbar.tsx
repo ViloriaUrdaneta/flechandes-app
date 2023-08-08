@@ -13,6 +13,8 @@ export default function Navbar() {
         location = 'Inicio'
     }else if(pathname === '/publicar'){
         location = 'Publicar'
+    } else if(pathname === '/perfil'){
+        location = 'Perfil'
     }
    
 
