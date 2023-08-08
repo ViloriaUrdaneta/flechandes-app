@@ -19,7 +19,7 @@ export default function FormPage() {
         const handleResize = () => {
             const windowHeigt = window.innerHeight;
             const bodyHeight = document.body.clientHeight;
-            const keyboardThreshold = 100;
+            const keyboardThreshold = 200;
             const isKeyboard = windowHeigt + keyboardThreshold < bodyHeight;
             setIsKeyboardVisible(isKeyboard);
         };
@@ -35,7 +35,7 @@ export default function FormPage() {
     }
 
     return (
-        <div className='flex min-h-screen bg-gray-300 flex-col items-center content-center p-24'>
+        <div className='flex min-h-screen bg-gray-300 flex-col items-center content-center p-16'>
             <Navbar/>
             <div className='flex justify-evenly mb-3'>
                 <SecondaryButton>Envíos</SecondaryButton>
