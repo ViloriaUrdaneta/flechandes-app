@@ -11,7 +11,7 @@ export default function MainButton({ children }: MainButtonProps) {
         <div className='flex'>
             <div className='ml-8'>
                 <h3 className='text-sky-500 font-bold'>{children}</h3>
-                <p className='text-xs mt-2'>Retiramos tus paquetes y los entregamos en la dirección que indiques</p>
+                <p className='text-xs mt-2 text-black'>Retiramos tus paquetes y los entregamos en la dirección que indiques</p>
             </div>
             <div className='text-center ml-5 mr-7'>
                 <h3>00</h3>
