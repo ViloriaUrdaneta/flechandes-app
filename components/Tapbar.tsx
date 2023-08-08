@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Tapbar() {
   return (
     <div>
-      <div className='absolute bottom-0 right-0 bg-red w-screen h-20 flex items-center justify-evenly text-white'>
+      <div className='fixed bottom-0 right-0 bg-red w-screen h-20 flex items-center justify-evenly text-white'>
         <Link href={'/'}>
             <div className='text-center'>
                 <h1>i</h1>

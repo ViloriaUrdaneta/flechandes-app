@@ -42,7 +42,10 @@ export default function FormPage() {
                 <SecondaryButton>Fletes</SecondaryButton>
                 <SecondaryButton>Mudanzas</SecondaryButton>
             </div>
-            <Form onNewFlete={handleNewFlete}/>
+            <div className='mb-12'>
+                <Form onNewFlete={handleNewFlete}/>
+            </div>
+            
             { isKeyboardVisible ? (<></>) : (<Tapbar/>)}
         </div>
     )
