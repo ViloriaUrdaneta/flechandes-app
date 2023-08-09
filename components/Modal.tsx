@@ -2,7 +2,7 @@ import React, { ReactNode }  from 'react'
 
 interface ModalProps {
     children: ReactNode;
-    onRequestClose: () => void;
+    onRequestClose: (e: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 export default function Modal({children, onRequestClose }: ModalProps) {
@@ -15,9 +15,9 @@ export default function Modal({children, onRequestClose }: ModalProps) {
                 </div>
                 <p className='text-center font-bold mt-4 text-sky-600'>i</p>
                 <p className='text-center font-bold mt-3 text-sky-600'>{children}</p>
-                <p className='text-center text-sm mt-3 mr-20 ml-20'>Describe detalladamente qué necesitas movilizar</p>
+                <p className='text-center text-black text-sm mt-3 mr-20 ml-20'>Describe detalladamente qué necesitas movilizar</p>
                 <div className='flex justify-center pt-2'>
-                    <textarea className='lex mt-4 bg-sky-100 text-sm items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2 h-24'>
+                    <textarea className='lex mt-4 bg-sky-100 text-sm items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2 h-24 text-black'>
                     </textarea>
                 </div>
                 <div className='flex justify-evenly my-6 '>

@@ -15,9 +15,11 @@ function Form({onNewFlete}: FormProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsModalOpen(true);
+        document.body.classList.add('overflow-hidden');
         console.log('clic')
     }
     const closeModal = (e: React.MouseEvent<HTMLInputElement>) => {
+        document.body.classList.remove('overflow-hidden');
         setIsModalOpen(false);
     }
 
@@ -65,7 +67,7 @@ function Form({onNewFlete}: FormProps) {
             </form>
             { isModalOpen && (
                 <Modal
-                    onRequestClose={() => setIsModalOpen(false)} 
+                    onRequestClose={closeModal} 
                 >    
                     <p>¿Qué transportas?</p>
                 </Modal>
