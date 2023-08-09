@@ -15,12 +15,12 @@ function Form({onNewFlete}: FormProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsModalOpen(true);
-        //document.body.classList.add('overflow-hidden');
+        document.body.classList.add('overflow-hidden');
         console.log('clic')
     }
-    const closeModal = () => {
+    const closeModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
-        //setIsModalOpen(false);
+        setIsModalOpen(false);
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

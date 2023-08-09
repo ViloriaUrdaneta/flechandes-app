@@ -2,7 +2,7 @@ import React, { ReactNode, useState, useEffect }  from 'react'
 
 interface ModalProps {
     children: ReactNode;
-    onRequestClose: () => void;
+    onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
 }
 
 export default function Modal({children, onRequestClose }: ModalProps) {
