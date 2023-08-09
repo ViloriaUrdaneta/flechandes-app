@@ -17,6 +17,9 @@ function Form({onNewFlete}: FormProps) {
         setIsModalOpen(true);
         console.log('clic')
     }
+    const closeModal = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsModalOpen(false);
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -61,8 +64,10 @@ function Form({onNewFlete}: FormProps) {
                 <button onClick={handleClear} type='submit' className='lex items-center w-80 rounded-lg shadow-lg p-3 font-bold bg-sky-500 text-white drop-shadow-lg'>Publicar</button>
             </form>
             { isModalOpen && (
-                <Modal >
-                    <p>¡Has hecho clic en el campo!</p>
+                <Modal
+                    onRequestClose={() => setIsModalOpen(false)} 
+                >    
+                    <p>¿Qué transportas?</p>
                 </Modal>
             )}
             
