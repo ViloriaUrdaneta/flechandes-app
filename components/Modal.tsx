@@ -1,15 +1,34 @@
-import React, { ReactNode }  from 'react'
+import React, { ReactNode, useState, useEffect }  from 'react'
 
 interface ModalProps {
     children: ReactNode;
-    onRequestClose: (e: React.MouseEvent<HTMLInputElement>) => void;
+    onRequestClose: () => void;
 }
 
 export default function Modal({children, onRequestClose }: ModalProps) {
+
+    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const windowHeigt = window.innerHeight;
+            const bodyHeight = document.body.clientHeight;
+            const keyboardThreshold = 200;
+            const isKeyboard = windowHeigt + keyboardThreshold < bodyHeight;
+            setIsKeyboardVisible(isKeyboard);
+        };
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    },[])
+
+    const modalMarginBotton = !isKeyboardVisible ? 'mb-20' : '';
+
     return (
         <div className='fixed bottom-0 right-0 w-screen h-screen flex items-center justify-center'>
             <div className='bg-black w-full h-full opacity-50 absolute' onClick={onRequestClose}></div>
-            <div className='fixed bottom-0 justify-center bg-gray-200 w-full  rounded-t-lg'>
+            <div className={`fixed bottom-0 justify-center bg-gray-200 w-full rounded-t-lg ${modalMarginBotton}`}>
                 <div className='flex justify-center pt-2'>
                     <hr className='text-center border-t-4 rounded-full w-8 border-sky-600'/>
                 </div>
@@ -21,7 +40,7 @@ export default function Modal({children, onRequestClose }: ModalProps) {
                     </textarea>
                 </div>
                 <div className='flex justify-evenly my-6 '>
-                    <button className='rounded-lg border-2 border-sky-500 bg-gray-200 px-10 py-2 my-1 text-sky-500 font-semibold'>Cancelar</button>
+                    <button className='rounded-lg border-2 border-sky-500 bg-gray-200 px-10 py-2 my-1 text-sky-500 font-semibold' onClick={onRequestClose}>Cancelar</button>
                     <button className='rounded-lg bg-sky-500 px-10 py-2 my-1 text-white font-semibold'>Aceptar</button>
                 </div>
                 

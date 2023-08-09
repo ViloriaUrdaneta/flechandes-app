@@ -18,7 +18,7 @@ function Form({onNewFlete}: FormProps) {
         document.body.classList.add('overflow-hidden');
         console.log('clic')
     }
-    const closeModal = (e: React.MouseEvent<HTMLInputElement>) => {
+    const closeModal = () => {
         document.body.classList.remove('overflow-hidden');
         setIsModalOpen(false);
     }

@@ -11,7 +11,6 @@ export default function Home() {
       <Link href={'/publicar'}>
         <MainButton>Envíos</MainButton>
       </Link>
-      
       <MainButton>Fletes</MainButton>
       <MainButton>Mudanzas</MainButton>
       <Tapbar/>
