@@ -1,6 +1,6 @@
-import MainButton from '@/components/MainButton'
-import Navbar from '@/components/Navbar'
-import Tapbar from '@/components/Tapbar'
+import MainButton from '@/components/buttons/MainButton'
+import Navbar from '@/components/bars/Navbar'
+import Tapbar from '@/components/bars/Tapbar'
 import Image from 'next/image'
 import Link from 'next/link';
 

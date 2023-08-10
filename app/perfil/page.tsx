@@ -1,5 +1,5 @@
-import Navbar from '@/components/Navbar'
-import Tapbar from '@/components/Tapbar'
+import Navbar from '@/components/bars/Navbar'
+import Tapbar from '@/components/bars/Tapbar'
 import React from 'react'
 
 export default function page() {

@@ -1,8 +1,10 @@
 //import useNewFleteForm from '../hooks/useNewFleteForm';
 import React, { useState } from 'react';
-import { Flete } from '../types';
-import Modal from './Modal';
-import "./module.css";
+import { Flete } from '../../types';
+import CargoModal from '../modals/CargoModal';
+import "../module.css";
+import PhotoModal from '../modals/PhotoModal';
+import VehicleModal from '../modals/VehicleModal';
 
 
 interface FormProps {
@@ -12,17 +14,51 @@ interface FormProps {
 function Form({onNewFlete}: FormProps) {
 
     //const [inputValues, dispatch] = useNewFleteForm()
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
-        setIsModalOpen(true);
+
+    /**
+     * Estados de los modales
+     */
+    const [isCargoModalOpen, setIsCargoModalOpen] = useState(false);
+    const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+    const [isVehicleModalOpen, setIsVehicleModalOpen] = useState(false);
+
+
+    /**
+     * Handlers open modals
+     */
+    const handleCargoInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsCargoModalOpen(true);
         document.body.classList.add('overflow-hidden');
-        console.log('clic')
     }
-    const closeModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const handlePhotoInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsPhotoModalOpen(true);
+        document.body.classList.add('overflow-hidden');
+    }
+    const handleVehicleInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsVehicleModalOpen(true);
+        document.body.classList.add('overflow-hidden');
+    }
+    
+
+    /**
+     * Close Modals functions
+     */
+    const closeCargoModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
-        setIsModalOpen(false);
+        setIsCargoModalOpen(false);
+    }
+    const closePhotoModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        document.body.classList.remove('overflow-hidden');
+        setIsPhotoModalOpen(false);
+    }
+    const closeVehicleModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        document.body.classList.remove('overflow-hidden');
+        setIsVehicleModalOpen(false);
     }
 
+    /**
+     * Handler Submit
+     */
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         //onNewFlete(inputValues);
@@ -49,9 +85,9 @@ function Form({onNewFlete}: FormProps) {
             <form onSubmit={handleSubmit} className='flex flex-col gap-3 text-black'>
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='origen' placeholder='Origen de carga' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='destino' placeholder='Destino de carga' />
-                <input onChange={handleChange} onClick={handleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
+                <input onChange={handleChange} onClick={handleCargoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
+                <input onChange={handleChange} onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
+                <input onChange={handleChange} onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
@@ -65,12 +101,22 @@ function Form({onNewFlete}: FormProps) {
                 <p className='font-bold text-xs'>Cobertura del 100% del valor de tu carga en caso de daño o perdida</p>
                 <button onClick={handleClear} type='submit' className='lex items-center w-80 rounded-lg shadow-lg p-3 font-bold bg-sky-500 text-white drop-shadow-lg'>Publicar</button>
             </form>
-            { isModalOpen && (
-                <Modal
-                    onRequestClose={closeModal} 
+            { isCargoModalOpen && (
+                <CargoModal
+                    onRequestClose={closeCargoModal} 
                 >    
                     <p>¿Qué transportas?</p>
-                </Modal>
+                </CargoModal>
+            )}
+            { isPhotoModalOpen && (
+                <PhotoModal
+                    onRequestClose={closePhotoModal} 
+                />    
+            )}
+            { isVehicleModalOpen && (
+                <VehicleModal
+                    onRequestClose={closeVehicleModal} 
+                />    
             )}
             
         </div>

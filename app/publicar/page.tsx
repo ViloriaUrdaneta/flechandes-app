@@ -1,10 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Form from '@/components/Form'
+import Form from '@/components/containers/Form'
 import { Flete } from '@/types'
-import Navbar from '@/components/Navbar';
-import Tapbar from '@/components/Tapbar';
-import SecondaryButton from '@/components/SecondaryButton';
+import Navbar from '@/components/bars/Navbar';
+import Tapbar from '@/components/bars/Tapbar';
+import SecondaryButton from '@/components/buttons/SecondaryButton';
 
 interface AppState {
     flete: Array<Flete>
