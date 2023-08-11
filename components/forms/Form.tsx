@@ -5,6 +5,8 @@ import CargoModal from '../modals/CargoModal';
 import "../module.css";
 import PhotoModal from '../modals/PhotoModal';
 import VehicleModal from '../modals/VehicleModal';
+import OfferModal from '../modals/OfferModal';
+import AssistantModal from '../modals/AssistantModal';
 
 
 interface FormProps {
@@ -21,6 +23,8 @@ function Form({onNewFlete}: FormProps) {
     const [isCargoModalOpen, setIsCargoModalOpen] = useState(false);
     const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
     const [isVehicleModalOpen, setIsVehicleModalOpen] = useState(false);
+    const [isAssistantModalOpen, setIsAssistantModalOpen] = useState(false);
+    const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
 
     /**
@@ -38,7 +42,14 @@ function Form({onNewFlete}: FormProps) {
         setIsVehicleModalOpen(true);
         document.body.classList.add('overflow-hidden');
     }
-    
+    const handleAssistantInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsAssistantModalOpen(true);
+        document.body.classList.add('overflow-hidden');
+    }
+    const handleOfferInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsOfferModalOpen(true);
+        document.body.classList.add('overflow-hidden');
+    }
 
     /**
      * Close Modals functions
@@ -54,6 +65,14 @@ function Form({onNewFlete}: FormProps) {
     const closeVehicleModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsVehicleModalOpen(false);
+    }
+    const closeAssistantModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        document.body.classList.remove('overflow-hidden');
+        setIsAssistantModalOpen(false);
+    }
+    const closeOfferModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        document.body.classList.remove('overflow-hidden');
+        setIsOfferModalOpen(false);
     }
 
     /**
@@ -89,8 +108,8 @@ function Form({onNewFlete}: FormProps) {
                 <input onChange={handleChange} onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
                 <input onChange={handleChange} onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
+                <input onChange={handleChange} onClick={handleAssistantInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
+                <input onChange={handleChange} onClick={handleOfferInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>
                     <label className="toggle">
@@ -117,6 +136,20 @@ function Form({onNewFlete}: FormProps) {
                 <VehicleModal
                     onRequestClose={closeVehicleModal} 
                 />    
+            )}
+            { isAssistantModalOpen && (
+                <AssistantModal
+                    onRequestClose={closeAssistantModal} 
+                > 
+                <p>¿Cuantos ayudantes necesitas?</p>   
+                </AssistantModal>
+            )}
+            { isOfferModalOpen && (
+                <OfferModal
+                    onRequestClose={closeOfferModal} 
+                > 
+                <p>¿Cual es tu oferta?</p>   
+                </OfferModal>
             )}
             
         </div>

@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Form from '@/components/containers/Form'
+import Form from '@/components/forms/Form'
 import { Flete } from '@/types'
 import Navbar from '@/components/bars/Navbar';
 import Tapbar from '@/components/bars/Tapbar';
