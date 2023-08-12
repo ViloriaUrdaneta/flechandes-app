@@ -116,9 +116,9 @@ function Form({onNewFlete}: FormProps) {
                 <input onChange={handleChange} readOnly onClick={handleCargoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
                 <input onChange={handleChange} autoCapitalize="none" onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
                 <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
-                <input onChange={handleChange} onClick={handleDateInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
-                <input onChange={handleChange} onClick={handleAssistantInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
-                <input onChange={handleChange} onClick={handleOfferInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
+                <input onChange={handleChange} readOnly onClick={handleDateInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
+                <input onChange={handleChange} readOnly onClick={handleAssistantInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
+                <input onChange={handleChange} readOnly onClick={handleOfferInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>
                     <label className="toggle">
