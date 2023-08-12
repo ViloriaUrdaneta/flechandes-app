@@ -47,7 +47,7 @@ export default function DateModal({children, onRequestClose }: ModalProps) {
                 </div>
                 <p className='text-center font-bold mt-4 text-sky-600'>i</p>
                 <p className='text-center font-bold mt-3 text-sky-600'>{children}</p>
-                <div className='flex justify-evenly my-6 text-sky-600'>
+                <div className='flex justify-evenly my-6 text-sky-600 bg-gray-200'>
                     <Datetime input={false} inputProps={{className:'datetime'}}/>
                 </div>
                 <div className='flex justify-evenly my-6 '>
