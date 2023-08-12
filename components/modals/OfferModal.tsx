@@ -34,8 +34,8 @@ export default function OfferModal({children, onRequestClose }: ModalProps) {
                 </div>
                 <p className='text-center font-bold mt-8 text-sky-600'>{children}</p>
                 <p className='text-center text-black text-sm mt-3 mr-12 ml-12'>Según el detalle de tu flete el precio mínimo es de 35.000</p>
-                <div className='flex justify-center pt-4 mt-8'>
-                    <input type='text' className='bg-gray-200 '></input>
+                <div className='flex justify-center pt-4 mt-8 text-black font-bold'>
+                    <input type='text' className='bg-gray-200 text-center'></input>
                 </div>
                 <div className='flex justify-center pt-2'>
                     <hr className='text-center border rounded-full w-64 border-sky-600'/>
