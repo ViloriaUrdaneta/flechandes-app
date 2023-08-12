@@ -7,6 +7,7 @@ import PhotoModal from '../modals/PhotoModal';
 import VehicleModal from '../modals/VehicleModal';
 import OfferModal from '../modals/OfferModal';
 import AssistantModal from '../modals/AssistantModal';
+import DateModal from '../modals/DateModal';
 
 
 interface FormProps {
@@ -25,6 +26,7 @@ function Form({onNewFlete}: FormProps) {
     const [isVehicleModalOpen, setIsVehicleModalOpen] = useState(false);
     const [isAssistantModalOpen, setIsAssistantModalOpen] = useState(false);
     const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
+    const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
 
     /**
@@ -33,47 +35,54 @@ function Form({onNewFlete}: FormProps) {
     const handleCargoInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsCargoModalOpen(true);
         document.body.classList.add('overflow-hidden');
-    }
+    };
     const handlePhotoInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsPhotoModalOpen(true);
         document.body.classList.add('overflow-hidden');
-    }
+    };
     const handleVehicleInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsVehicleModalOpen(true);
         document.body.classList.add('overflow-hidden');
-    }
+    };
     const handleAssistantInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsAssistantModalOpen(true);
         document.body.classList.add('overflow-hidden');
-    }
+    };
     const handleOfferInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsOfferModalOpen(true);
         document.body.classList.add('overflow-hidden');
-    }
-
+    };
+    const handleDateInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
+        setIsDateModalOpen(true);
+        document.body.classList.add('overflow-hidden');
+    };
     /**
      * Close Modals functions
      */
     const closeCargoModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsCargoModalOpen(false);
-    }
+    };
     const closePhotoModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsPhotoModalOpen(false);
-    }
+    };
     const closeVehicleModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsVehicleModalOpen(false);
-    }
+    };
     const closeAssistantModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsAssistantModalOpen(false);
-    }
+    };
     const closeOfferModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsOfferModalOpen(false);
-    }
+    };
+    const closeDateModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        document.body.classList.remove('overflow-hidden');
+        setIsDateModalOpen(false);
+    };
 
     /**
      * Handler Submit
@@ -107,7 +116,7 @@ function Form({onNewFlete}: FormProps) {
                 <input onChange={handleChange} onClick={handleCargoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
                 <input onChange={handleChange} onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
                 <input onChange={handleChange} onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
+                <input onChange={handleChange} onClick={handleDateInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
                 <input onChange={handleChange} onClick={handleAssistantInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
                 <input onChange={handleChange} onClick={handleOfferInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
                 <div className='flex items-center justify-between'>
@@ -136,6 +145,13 @@ function Form({onNewFlete}: FormProps) {
                 <VehicleModal
                     onRequestClose={closeVehicleModal} 
                 />    
+            )}
+            { isDateModalOpen && (
+                <DateModal
+                    onRequestClose={closeDateModal} 
+                >    
+                    <p>¿Cuando lo necesitas?</p>
+                </DateModal>
             )}
             { isAssistantModalOpen && (
                 <AssistantModal
