@@ -28,7 +28,6 @@ function Form({onNewFlete}: FormProps) {
     const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
     const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
-
     /**
      * Handlers open modals
      */
@@ -56,6 +55,7 @@ function Form({onNewFlete}: FormProps) {
         setIsDateModalOpen(true);
         document.body.classList.add('overflow-hidden');
     };
+
     /**
      * Close Modals functions
      */
@@ -113,9 +113,9 @@ function Form({onNewFlete}: FormProps) {
             <form onSubmit={handleSubmit} className='flex flex-col gap-3 text-black'>
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='origen' placeholder='Origen de carga' />
                 <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='destino' placeholder='Destino de carga' />
-                <input onChange={handleChange} onClick={handleCargoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
-                <input onChange={handleChange} onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
-                <input onChange={handleChange} onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
+                <input onChange={handleChange} readOnly onClick={handleCargoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
+                <input onChange={handleChange} autoCapitalize="none" onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
+                <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
                 <input onChange={handleChange} onClick={handleDateInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
                 <input onChange={handleChange} onClick={handleAssistantInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
                 <input onChange={handleChange} onClick={handleOfferInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
@@ -167,7 +167,6 @@ function Form({onNewFlete}: FormProps) {
                 <p>¿Cual es tu oferta?</p>   
                 </OfferModal>
             )}
-            
         </div>
     )
 }
