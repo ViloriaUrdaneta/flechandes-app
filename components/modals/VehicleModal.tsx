@@ -3,9 +3,10 @@ import VehicleButton from '../buttons/VehicleButton';
 
 interface ModalProps {
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
+    onSave: (value: string) => void;
 }
 
-export default function VehicleModal({onRequestClose }: ModalProps) {
+export default function VehicleModal({ onRequestClose, onSave }: ModalProps) {
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 

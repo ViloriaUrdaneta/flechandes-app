@@ -8,6 +8,7 @@ import VehicleModal from '../modals/VehicleModal';
 import OfferModal from '../modals/OfferModal';
 import AssistantModal from '../modals/AssistantModal';
 import DateModal from '../modals/DateModal';
+import { numberWithDots } from '@/utils/numberWithDots';
 
 
 interface FormProps {
@@ -18,19 +19,24 @@ function Form({onNewFlete}: FormProps) {
 
     const [inputValues, dispatch] = useNewFleteForm()
     /**
-     * Valores inputs modales
+     * Valores modales
      */
     const [cargoDescription, setCargoDescription] = useState('');
+    const [photo, setPhoto] = useState('');
+    const [vehicle, setVehicle] = useState('');
+    const [date, setDate] = useState('');
+    const [assitant, setAssitant] = useState('');
+    const [offer, setOffer] = useState(0);
     /**
      * Estados de los modales
      */
     const [isCargoModalOpen, setIsCargoModalOpen] = useState(false);
     const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
     const [isVehicleModalOpen, setIsVehicleModalOpen] = useState(false);
+    const [isDateModalOpen, setIsDateModalOpen] = useState(false);
     const [isAssistantModalOpen, setIsAssistantModalOpen] = useState(false);
     const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
-    const [isDateModalOpen, setIsDateModalOpen] = useState(false);
-
+    
     /**
      * Handlers open modals
      */
@@ -93,7 +99,6 @@ function Form({onNewFlete}: FormProps) {
      */
     const handleCargoModalSave = (value: string) => {
         setCargoDescription(value);
-        console.log(value)
         dispatch({
             type: 'change_value',
             payload: {
@@ -102,6 +107,61 @@ function Form({onNewFlete}: FormProps) {
             },
         });
         setIsCargoModalOpen(false);
+    };
+    const handlePhotoModalSave = (value: string) => {
+        setPhoto(value);
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: 'carga',
+                inputValue: cargoDescription,
+            },
+        });
+        setIsPhotoModalOpen(false);
+    };
+    const handleVehicleModalSave = (value: string) => {
+        setPhoto(value);
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: 'carga',
+                inputValue: cargoDescription,
+            },
+        });
+        setIsVehicleModalOpen(false);
+    };
+    const handleDateModalSave = (value: string) => {
+        setPhoto(value);
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: 'carga',
+                inputValue: cargoDescription,
+            },
+        });
+        setIsDateModalOpen(false);
+    };
+    const handleAssitantModalSave = (value: string) => {
+        setAssitant(value);
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: 'carga',
+                inputValue: cargoDescription,
+            },
+        });
+        setIsAssistantModalOpen(false);
+    };
+    const handleOfferModalSave = (value: string) => {
+        setOffer(Number(value));
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: 'carga',
+                inputValue: cargoDescription,
+            },
+        });
+        setIsOfferModalOpen(false);
     };
 
     /**
@@ -125,7 +185,7 @@ function Form({onNewFlete}: FormProps) {
     }
 
     const handleClear = () => {
-        //dispatch({type: "clear"})
+        dispatch({type: "clear"})
     }
 
     return (
@@ -164,6 +224,7 @@ function Form({onNewFlete}: FormProps) {
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
                     name='foto' 
                     placeholder='Agregar imágenes del flete' 
+                    value={photo}
                 />
                 <input 
                     onChange={handleChange} 
@@ -172,8 +233,9 @@ function Form({onNewFlete}: FormProps) {
                     onClick={handleVehicleInputChange} 
                     type='text' 
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
-                    name='foto' 
+                    name='vehiculo' 
                     placeholder='¿Qué vehiculo necesitas?' 
+                    value={vehicle}
                 />
                 <input 
                     onChange={handleChange} 
@@ -193,7 +255,8 @@ function Form({onNewFlete}: FormProps) {
                     type='text' 
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
                     name='ayudante' 
-                    placeholder='¿Necesitas ayudante?' 
+                    placeholder='¿Necesitas ayudante?'
+                    value={assitant} 
                 />
                 <input 
                     onChange={handleChange} 
@@ -204,6 +267,7 @@ function Form({onNewFlete}: FormProps) {
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
                     name='oferta' 
                     placeholder='Oferta un precio' 
+                    value={numberWithDots(offer)}
                 />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>
@@ -228,16 +292,19 @@ function Form({onNewFlete}: FormProps) {
             { isPhotoModalOpen && (
                 <PhotoModal
                     onRequestClose={closePhotoModal} 
+                    onSave={handlePhotoModalSave}
                 />    
             )}
             { isVehicleModalOpen && (
                 <VehicleModal
                     onRequestClose={closeVehicleModal} 
+                    onSave={handleVehicleModalSave}
                 />    
             )}
             { isDateModalOpen && (
                 <DateModal
                     onRequestClose={closeDateModal} 
+                    onSave={handleDateModalSave}
                 >    
                     <p>¿Cuando lo necesitas?</p>
                 </DateModal>
@@ -245,13 +312,15 @@ function Form({onNewFlete}: FormProps) {
             { isAssistantModalOpen && (
                 <AssistantModal
                     onRequestClose={closeAssistantModal} 
+                    onSave={handleAssitantModalSave}
                 > 
                 <p>¿Cuantos ayudantes necesitas?</p>   
                 </AssistantModal>
             )}
             { isOfferModalOpen && (
                 <OfferModal
-                    onRequestClose={closeOfferModal} 
+                    onRequestClose={closeOfferModal}
+                    onSave={handleOfferModalSave} 
                 > 
                 <p>¿Cual es tu oferta?</p>   
                 </OfferModal>

@@ -9,14 +9,14 @@ import TimePicker from 'react-time-picker';
 import 'react-datepicker/dist/react-datepicker.css'; 
 import 'react-time-picker/dist/TimePicker.css';
 
-import MyDatePicker from './MyDatePicker';
 
 interface ModalProps {
     children: ReactNode;
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
+    onSave: (value: string) => void;
 }
 
-export default function DateModal({children, onRequestClose }: ModalProps) {
+export default function DateModal({ children, onRequestClose, onSave }: ModalProps) {
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState('12:00');

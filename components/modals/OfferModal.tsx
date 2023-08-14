@@ -3,11 +3,21 @@ import React, { ReactNode, useState, useEffect }  from 'react'
 interface ModalProps {
     children: ReactNode;
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
+    onSave: (value: string) => void;
 }
 
-export default function OfferModal({children, onRequestClose }: ModalProps) {
+export default function OfferModal({children, onRequestClose, onSave }: ModalProps) {
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+    const [offer, setOffer] = useState('');
+
+    const handleAccept = () => {
+        onSave(offer);
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setOffer(e.target.value);
+    }
 
     useEffect(() => {
         const handleResize = () => {
@@ -35,17 +45,37 @@ export default function OfferModal({children, onRequestClose }: ModalProps) {
                 <p className='text-center font-bold mt-8 text-sky-600'>{children}</p>
                 <p className='text-center text-black text-sm mt-3 mr-12 ml-12'>Según el detalle de tu flete el precio mínimo es de 35.000</p>
                 <div className='flex justify-center pt-4 mt-8 text-black font-bold'>
-                    <input type='text' className='bg-gray-200 text-center'></input>
+                    <input 
+                        type='text' 
+                        className='bg-gray-200 text-center'
+                        onChange={handleInputChange}
+                    >
+                        
+                    </input>
                 </div>
                 <div className='flex justify-center pt-2'>
                     <hr className='text-center border rounded-full w-64 border-sky-600'/>
                 </div>
                 <div className='flex justify-evenly mb-6 mt-8'>
-                    <button className='rounded-lg border-2 border-sky-500 bg-gray-200 px-10 py-2 my-1 text-sky-500 font-semibold' onClick={onRequestClose}>Cancelar</button>
-                    <button className='rounded-lg bg-sky-500 px-10 py-2 my-1 text-white font-semibold'>Aceptar</button>
+                    <button 
+                        className='rounded-lg border-2 border-sky-500 bg-gray-200 px-10 py-2 my-1 text-sky-500 font-semibold' 
+                        onClick={onRequestClose}
+                    >
+                        Cancelar
+                    </button>
+                    <button 
+                        className='rounded-lg bg-sky-500 px-10 py-2 my-1 text-white font-semibold'
+                        onClick={handleAccept}
+                    >
+                        Aceptar
+                    </button>
                 </div>
                 
             </div>
         </div>
     )
 }
+function onSave(offer: string) {
+    throw new Error('Function not implemented.');
+}
+
