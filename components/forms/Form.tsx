@@ -1,4 +1,4 @@
-//import useNewFleteForm from '../hooks/useNewFleteForm';
+import useNewFleteForm from '../../hooks/useNewFleteForm';
 import React, { useState } from 'react';
 import { Flete } from '../../types';
 import CargoModal from '../modals/CargoModal';
@@ -16,8 +16,11 @@ interface FormProps {
 
 function Form({onNewFlete}: FormProps) {
 
-    //const [inputValues, dispatch] = useNewFleteForm()
-
+    const [inputValues, dispatch] = useNewFleteForm()
+    /**
+     * Valores inputs modales
+     */
+    const [cargoDescription, setCargoDescription] = useState('');
     /**
      * Estados de los modales
      */
@@ -34,6 +37,7 @@ function Form({onNewFlete}: FormProps) {
     const handleCargoInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsCargoModalOpen(true);
         document.body.classList.add('overflow-hidden');
+        setCargoDescription(inputValues.carga);
     };
     const handlePhotoInputChange = (e: React.MouseEvent<HTMLInputElement>) => {
         setIsPhotoModalOpen(true);
@@ -85,23 +89,39 @@ function Form({onNewFlete}: FormProps) {
     };
 
     /**
+     * Handles modals savers
+     */
+    const handleCargoModalSave = (value: string) => {
+        setCargoDescription(value);
+        console.log(value)
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName: 'carga',
+                inputValue: cargoDescription,
+            },
+        });
+        setIsCargoModalOpen(false);
+    };
+
+    /**
      * Handler Submit
      */
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        //onNewFlete(inputValues);
+        onNewFlete(inputValues);
         handleClear();
     }
 
     const handleChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
         const {name, value} = e.target
-        /*dispatch({
+        dispatch({
             type: "change_value",
             payload: {
                 inputName: name,
                 inputValue: value
             }
-        })*/
+        })
     }
 
     const handleClear = () => {
@@ -111,14 +131,80 @@ function Form({onNewFlete}: FormProps) {
     return (
         <div className=''>
             <form onSubmit={handleSubmit} className='flex flex-col gap-3 text-black'>
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='origen' placeholder='Origen de carga' />
-                <input onChange={handleChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='destino' placeholder='Destino de carga' />
-                <input onChange={handleChange} readOnly onClick={handleCargoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='carga' placeholder='¿Qué transporta?' />
-                <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handlePhotoInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='Agregar imágenes del flete' />
-                <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handleVehicleInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='foto' placeholder='¿Qué vehiculo necesitas?' />
-                <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handleDateInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' name='foto' placeholder='¿Cuándo lo necesitas?' />
-                <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handleAssistantInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='ayudante' placeholder='¿Necesitas ayudante?' />
-                <input onChange={handleChange} readOnly autoCapitalize="none" onClick={handleOfferInputChange} type='text' className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  name='oferta' placeholder='Oferta un precio' />
+                <input 
+                    onChange={handleChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
+                    name='origen' 
+                    placeholder='Origen de carga' 
+                />
+                <input 
+                    onChange={handleChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    name='destino' 
+                    placeholder='Destino de carga' 
+                />
+                <input 
+                    onChange={handleChange} 
+                    readOnly 
+                    onClick={handleCargoInputChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    name='carga' 
+                    placeholder='¿Qué transporta?' 
+                    value={cargoDescription}
+                />
+                <input 
+                    onChange={handleChange} 
+                    readOnly 
+                    autoCapitalize="none" 
+                    onClick={handlePhotoInputChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
+                    name='foto' 
+                    placeholder='Agregar imágenes del flete' 
+                />
+                <input 
+                    onChange={handleChange} 
+                    readOnly 
+                    autoCapitalize="none" 
+                    onClick={handleVehicleInputChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    name='foto' 
+                    placeholder='¿Qué vehiculo necesitas?' 
+                />
+                <input 
+                    onChange={handleChange} 
+                    readOnly 
+                    autoCapitalize="none" 
+                    onClick={handleDateInputChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
+                    name='foto' 
+                    placeholder='¿Cuándo lo necesitas?' 
+                />
+                <input 
+                    onChange={handleChange} 
+                    readOnly 
+                    autoCapitalize="none" 
+                    onClick={handleAssistantInputChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    name='ayudante' 
+                    placeholder='¿Necesitas ayudante?' 
+                />
+                <input 
+                    onChange={handleChange} 
+                    readOnly 
+                    autoCapitalize="none" 
+                    onClick={handleOfferInputChange} 
+                    type='text' 
+                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    name='oferta' 
+                    placeholder='Oferta un precio' 
+                />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>
                     <label className="toggle">
@@ -132,6 +218,9 @@ function Form({onNewFlete}: FormProps) {
             { isCargoModalOpen && (
                 <CargoModal
                     onRequestClose={closeCargoModal} 
+                    cargoDescription={cargoDescription}
+                    onSave={handleCargoModalSave}
+                    updateFormDescription={setCargoDescription}
                 >    
                     <p>¿Qué transportas?</p>
                 </CargoModal>

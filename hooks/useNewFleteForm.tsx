@@ -1,4 +1,3 @@
-/*
 import { useReducer } from "react"
 import { Flete } from "../types"
 
@@ -44,4 +43,4 @@ const useNewFleteForm = () => {
     return useReducer(formReducer, INITIAL_STATE)
 }
 
-export default useNewFleteForm*/
+export default useNewFleteForm
