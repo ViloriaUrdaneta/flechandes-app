@@ -14,6 +14,13 @@ export default function OfferModal({children, onRequestClose, onSave, currentOff
     const [offer, setOffer] = useState(currentOffer);
 
     const handleAccept = () => {
+        const parsedOffer = parseFloat(offer);
+
+        if (!isNaN(parsedOffer) && parsedOffer >= 35000) {
+            onSave(offer);
+        } else {
+            console.log("Oferta inválida");
+        }
         onSave(offer);
     };
 
