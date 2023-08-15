@@ -15,6 +15,8 @@ export default function Navbar() {
         location = 'Publicar'
     } else if(pathname === '/perfil'){
         location = 'Perfil'
+    }  else if(pathname === '/fleterosdisponibles'){
+        location = 'Fleteros Disponibles'
     }
    
 

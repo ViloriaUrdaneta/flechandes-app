@@ -16,7 +16,7 @@ interface FormProps {
 
 function Form({onNewFlete}: FormProps) {
 
-    const [inputValues, dispatch] = useNewFleteForm()
+    const [inputValues, dispatch] = useNewFleteForm();
     /**
      * Valores modales
      */
@@ -27,6 +27,7 @@ function Form({onNewFlete}: FormProps) {
     const [assistant, setAssistant] = useState('');
     const [offer, setOffer] = useState(0);
     const [insurance, setInsurance] = useState(false);
+
     /**
      * Estados de los modales
      */
@@ -36,7 +37,25 @@ function Form({onNewFlete}: FormProps) {
     const [isDateModalOpen, setIsDateModalOpen] = useState(false);
     const [isAssistantModalOpen, setIsAssistantModalOpen] = useState(false);
     const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
-    
+
+    /**
+     * Validador de campos llenos
+     */
+    const validateForm = () => {
+        if (
+            inputValues.origen === '' ||
+            inputValues.destino === '' ||
+            inputValues.carga === '' ||
+            inputValues.vehiculo === '' ||
+            inputValues.fecha === '' ||
+            inputValues.ayudante === '' ||
+            inputValues.oferta === ''
+        ) {
+            return false;
+        }
+        return true;
+    };
+
     /**
      * Handlers open modals
      */
@@ -124,8 +143,13 @@ function Form({onNewFlete}: FormProps) {
      */
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onNewFlete(inputValues);
-        //handleClear();
+        if (validateForm()) {
+            onNewFlete(inputValues);
+            //handleClear();
+        } else {
+            // Puedes mostrar un mensaje de error o realizar alguna acción en caso de que no se cumplan los requisitos.
+            console.log('No todos los campos requeridos están llenos.');
+        }
     }
 
     const handleClear = () => {
