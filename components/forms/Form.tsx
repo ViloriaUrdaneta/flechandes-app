@@ -120,7 +120,7 @@ function Form({onNewFlete}: FormProps) {
         setIsPhotoModalOpen(false);
     };
     const handleVehicleModalSave = (value: string) => {
-        setPhoto(value);
+        setVehicle(value);
         dispatch({
             type: 'change_value',
             payload: {
@@ -267,7 +267,7 @@ function Form({onNewFlete}: FormProps) {
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
                     name='oferta' 
                     placeholder='Oferta un precio' 
-                    value={numberWithDots(offer)}
+                    value={offer !== 0 ? numberWithDots(offer) : ''}
                 />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>
@@ -321,6 +321,7 @@ function Form({onNewFlete}: FormProps) {
                 <OfferModal
                     onRequestClose={closeOfferModal}
                     onSave={handleOfferModalSave} 
+                    currentOffer={offer.toString()}
                 > 
                 <p>¿Cual es tu oferta?</p>   
                 </OfferModal>

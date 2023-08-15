@@ -1,15 +1,17 @@
+import { off } from 'process';
 import React, { ReactNode, useState, useEffect }  from 'react'
 
 interface ModalProps {
     children: ReactNode;
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
     onSave: (value: string) => void;
+    currentOffer: string
 }
 
-export default function OfferModal({children, onRequestClose, onSave }: ModalProps) {
+export default function OfferModal({children, onRequestClose, onSave, currentOffer }: ModalProps) {
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-    const [offer, setOffer] = useState('');
+    const [offer, setOffer] = useState(currentOffer);
 
     const handleAccept = () => {
         onSave(offer);
@@ -49,8 +51,8 @@ export default function OfferModal({children, onRequestClose, onSave }: ModalPro
                         type='text' 
                         className='bg-gray-200 text-center'
                         onChange={handleInputChange}
+                        value={offer}
                     >
-                        
                     </input>
                 </div>
                 <div className='flex justify-center pt-2'>
@@ -75,7 +77,5 @@ export default function OfferModal({children, onRequestClose, onSave }: ModalPro
         </div>
     )
 }
-function onSave(offer: string) {
-    throw new Error('Function not implemented.');
-}
+
 
