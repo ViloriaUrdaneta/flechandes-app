@@ -4,7 +4,7 @@ interface ModalProps {
     children: ReactNode;
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
     cargoDescription: string;
-    onSave: (value: string) => void;
+    onSave: () => void;
     updateFormDescription: (value: string) => void;
 }
 
@@ -42,7 +42,7 @@ export default function CargoModal({
     };
 
     const handleAccept = () => {
-        onSave(description);
+        onSave();
     };
 
     return (

@@ -25,8 +25,9 @@ function Form({onNewFlete}: FormProps) {
     const [photo, setPhoto] = useState('');
     const [vehicle, setVehicle] = useState('');
     const [date, setDate] = useState('');
-    const [assitant, setAssitant] = useState('');
+    const [assistant, setAssistant] = useState('');
     const [offer, setOffer] = useState(0);
+    const [insurance, setInsurance] = useState(false);
     /**
      * Estados de los modales
      */
@@ -69,110 +70,19 @@ function Form({onNewFlete}: FormProps) {
     /**
      * Close Modals functions
      */
-    const closeCargoModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const closeModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         document.body.classList.remove('overflow-hidden');
         setIsCargoModalOpen(false);
-    };
-    const closePhotoModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        document.body.classList.remove('overflow-hidden');
         setIsPhotoModalOpen(false);
-    };
-    const closeVehicleModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        document.body.classList.remove('overflow-hidden');
         setIsVehicleModalOpen(false);
-    };
-    const closeAssistantModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        document.body.classList.remove('overflow-hidden');
         setIsAssistantModalOpen(false);
-    };
-    const closeOfferModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        document.body.classList.remove('overflow-hidden');
         setIsOfferModalOpen(false);
-    };
-    const closeDateModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        document.body.classList.remove('overflow-hidden');
         setIsDateModalOpen(false);
     };
 
     /**
      * Handles modals savers
      */
-    const handleCargoModalSave = (value: string) => {
-        setCargoDescription(value);
-        dispatch({
-            type: 'change_value',
-            payload: {
-                inputName: 'carga',
-                inputValue: cargoDescription,
-            },
-        });
-        setIsCargoModalOpen(false);
-    };
-    const handlePhotoModalSave = (value: string) => {
-        setPhoto(value);
-        dispatch({
-            type: 'change_value',
-            payload: {
-                inputName: 'carga',
-                inputValue: cargoDescription,
-            },
-        });
-        setIsPhotoModalOpen(false);
-    };
-    const handleVehicleModalSave = (value: string) => {
-        setVehicle(value);
-        dispatch({
-            type: 'change_value',
-            payload: {
-                inputName: 'carga',
-                inputValue: cargoDescription,
-            },
-        });
-        setIsVehicleModalOpen(false);
-    };
-    const handleDateModalSave = (value: string) => {
-        setPhoto(value);
-        dispatch({
-            type: 'change_value',
-            payload: {
-                inputName: 'carga',
-                inputValue: cargoDescription,
-            },
-        });
-        setIsDateModalOpen(false);
-    };
-    const handleAssitantModalSave = (value: string) => {
-        setAssitant(value);
-        dispatch({
-            type: 'change_value',
-            payload: {
-                inputName: 'carga',
-                inputValue: cargoDescription,
-            },
-        });
-        setIsAssistantModalOpen(false);
-    };
-    const handleOfferModalSave = (value: string) => {
-        setOffer(Number(value));
-        dispatch({
-            type: 'change_value',
-            payload: {
-                inputName: 'carga',
-                inputValue: cargoDescription,
-            },
-        });
-        setIsOfferModalOpen(false);
-    };
-
-    /**
-     * Handler Submit
-     */
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        onNewFlete(inputValues);
-        handleClear();
-    }
-
     const handleChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
         const {name, value} = e.target
         dispatch({
@@ -183,14 +93,52 @@ function Form({onNewFlete}: FormProps) {
             }
         })
     }
+    const handleModalSave = (
+        inputName: string, 
+        inputValue: string, 
+        closeModalFunc: { (value: React.SetStateAction<boolean>): void; (arg0: boolean): void; }
+    ) => {
+        dispatch({
+            type: 'change_value',
+            payload: {
+                inputName,
+                inputValue,
+            },
+        });
+        document.body.classList.remove('overflow-hidden');
+        closeModalFunc(false);
+    };
+    const handleInsuranceSave = ( e: React.ChangeEvent<HTMLInputElement> ) => {
+        const { name, checked } = e.target;
+        setInsurance(checked); 
+        dispatch({
+            type: "change_value",
+            payload: {
+                inputName: name,
+                inputValue: checked.toString()
+            },
+        });
+    };
+
+    /**
+     * Handler Submit
+     */
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onNewFlete(inputValues);
+        //handleClear();
+    }
 
     const handleClear = () => {
         dispatch({type: "clear"})
     }
 
     return (
-        <div className=''>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-3 text-black'>
+        <div>
+            <form 
+                onSubmit={handleSubmit} 
+                className='flex flex-col gap-3 text-black'
+            >
                 <input 
                     onChange={handleChange} 
                     type='text' 
@@ -244,8 +192,9 @@ function Form({onNewFlete}: FormProps) {
                     onClick={handleDateInputChange} 
                     type='text' 
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
-                    name='foto' 
+                    name='fecha' 
                     placeholder='¿Cuándo lo necesitas?' 
+                    value={date}
                 />
                 <input 
                     onChange={handleChange} 
@@ -256,7 +205,7 @@ function Form({onNewFlete}: FormProps) {
                     className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
                     name='ayudante' 
                     placeholder='¿Necesitas ayudante?'
-                    value={assitant} 
+                    value={assistant} 
                 />
                 <input 
                     onChange={handleChange} 
@@ -272,18 +221,29 @@ function Form({onNewFlete}: FormProps) {
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>
                     <label className="toggle">
-                        <input className="toggle-checkbox" type="checkbox"/>
+                        <input 
+                            className="toggle-checkbox" 
+                            type="checkbox"
+                            name='seguro'
+                            onChange={handleInsuranceSave} 
+                            checked={insurance}
+                        />
                         <div className="toggle-switch"></div>
                     </label>
                 </div>
                 <p className='font-bold text-xs'>Cobertura del 100% del valor de tu carga en caso de daño o perdida</p>
-                <button onClick={handleClear} type='submit' className='lex items-center w-80 rounded-lg shadow-lg p-3 font-bold bg-sky-500 text-white drop-shadow-lg'>Publicar</button>
+                <button  
+                    type='submit' 
+                    className='lex items-center w-80 rounded-lg shadow-lg p-3 font-bold bg-sky-500 text-white drop-shadow-lg'
+                >
+                    Publicar
+                </button>
             </form>
             { isCargoModalOpen && (
                 <CargoModal
-                    onRequestClose={closeCargoModal} 
+                    onRequestClose={closeModal} 
                     cargoDescription={cargoDescription}
-                    onSave={handleCargoModalSave}
+                    onSave={() => handleModalSave('carga', cargoDescription, setIsCargoModalOpen)}
                     updateFormDescription={setCargoDescription}
                 >    
                     <p>¿Qué transportas?</p>
@@ -291,37 +251,42 @@ function Form({onNewFlete}: FormProps) {
             )}
             { isPhotoModalOpen && (
                 <PhotoModal
-                    onRequestClose={closePhotoModal} 
-                    onSave={handlePhotoModalSave}
+                    onRequestClose={closeModal} 
+                    onSave={() => handleModalSave('foto', photo, setIsPhotoModalOpen)}
+                    updatePhoto={setPhoto}
                 />    
             )}
             { isVehicleModalOpen && (
                 <VehicleModal
-                    onRequestClose={closeVehicleModal} 
-                    onSave={handleVehicleModalSave}
+                    onRequestClose={closeModal} 
+                    onSave={() => handleModalSave('vehiculo', vehicle, setIsVehicleModalOpen)}
+                    updateVehicle={setVehicle}
                 />    
             )}
             { isDateModalOpen && (
                 <DateModal
-                    onRequestClose={closeDateModal} 
-                    onSave={handleDateModalSave}
+                    onRequestClose={closeModal} 
+                    onSave={() => handleModalSave('fecha', date, setIsDateModalOpen)}
+                    updateDate={setDate}
                 >    
                     <p>¿Cuando lo necesitas?</p>
                 </DateModal>
             )}
             { isAssistantModalOpen && (
                 <AssistantModal
-                    onRequestClose={closeAssistantModal} 
-                    onSave={handleAssitantModalSave}
+                    onRequestClose={closeModal} 
+                    onSave={() => handleModalSave('ayudante', assistant, setIsAssistantModalOpen)}
+                    updateAssistant={setAssistant}
                 > 
                 <p>¿Cuantos ayudantes necesitas?</p>   
                 </AssistantModal>
             )}
             { isOfferModalOpen && (
                 <OfferModal
-                    onRequestClose={closeOfferModal}
-                    onSave={handleOfferModalSave} 
+                    onRequestClose={closeModal}
+                    onSave={() => handleModalSave('oferta', numberWithDots(offer), setIsOfferModalOpen)} 
                     currentOffer={offer.toString()}
+                    updateOffer={setOffer}
                 > 
                 <p>¿Cual es tu oferta?</p>   
                 </OfferModal>

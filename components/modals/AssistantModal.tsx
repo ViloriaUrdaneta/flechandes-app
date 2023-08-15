@@ -3,10 +3,11 @@ import React, { ReactNode, useState, useEffect }  from 'react'
 interface ModalProps {
     children: ReactNode;
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
-    onSave: (value: string) => void;
+    onSave: () => void;
+    updateAssistant: (value: string) => void
 }
 
-export default function AssitantModal({ children, onRequestClose, onSave }: ModalProps) {
+export default function AssitantModal({ children, onRequestClose, onSave, updateAssistant }: ModalProps) {
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const [assitantNumber, setAssitantNumber] = useState('0');
@@ -27,8 +28,13 @@ export default function AssitantModal({ children, onRequestClose, onSave }: Moda
 
     const modalMarginBotton = !isKeyboardVisible ? 'mb-20' : '';
 
+    const handleAssistantButton = (value: string) => {
+        setAssitantNumber(value);
+        updateAssistant(value)
+    };
+
     const handleAccept = () => {
-        onSave(assitantNumber);
+        onSave();
     };
 
     return (
@@ -41,26 +47,26 @@ export default function AssitantModal({ children, onRequestClose, onSave }: Moda
                 <p className='text-center font-bold mt-8 text-sky-600'>{children}</p>
                 <div className='flex flex-col mt-8 items-center content-center gap-2 mx-auto'>
                     <button 
-                        className='font-bold text-gray-400'
-                        onClick={() => setAssitantNumber('1')}
+                        className={`font-bold  ${assitantNumber === '1' ? 'text-black' : 'text-gray-400'}`}
+                        onClick={() => handleAssistantButton('1')}
                     >
                         1
                     </button>
                     <button 
-                        className='font-bold text-gray-400'
-                        onClick={() => setAssitantNumber('2')}
+                        className={`font-bold ${assitantNumber === '2' ? 'text-black' : 'text-gray-400'}`}
+                        onClick={() => handleAssistantButton('2')}
                     >
                         2
                     </button>
                     <button 
-                        className='font-bold text-gray-400'
-                        onClick={() => setAssitantNumber('3')}
+                        className={`font-bold ${assitantNumber === '3' ? 'text-black' : 'text-gray-400'}`}
+                        onClick={() => handleAssistantButton('3')}
                     >
                         3
                     </button>
                     <button 
                         className='font-bold text-gray-400'
-                        onClick={() => setAssitantNumber('0')}
+                        onClick={() => handleAssistantButton('0')}
                     >
                         Yo ayudo
                     </button>

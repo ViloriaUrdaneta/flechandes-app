@@ -15,7 +15,7 @@ export default function VehicleButton({ children, vehicleNumber, selectVehicle, 
 
   return (
     <div onClick={handleVehicleButton}>
-      <div className={`flex items-center w-80 rounded-lg shadow-lg h-28 border border-sky-500 ${isActive ? 'bg-sky-100' : 'bg-sky-200'}`}>
+      <div className={`flex items-center w-80 rounded-lg shadow-lg h-28 border border-sky-500 ${isActive ? 'bg-sky-200' : 'bg-sky-100'}`}>
         <div className='flex'>
             <div className='text-center my-auto ml-5 mr-7'>
                 <h3>Icono</h3>

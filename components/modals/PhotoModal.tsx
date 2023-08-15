@@ -2,10 +2,11 @@ import React, { useState, useEffect }  from 'react'
 
 interface ModalProps {
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
-    onSave: (value: string) => void;
+    onSave: () => void;
+    updatePhoto: (value: string) => void
 }
 
-export default function PhotoModal({ onRequestClose, onSave }: ModalProps) {
+export default function PhotoModal({ onRequestClose, onSave, updatePhoto }: ModalProps) {
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
@@ -26,7 +27,8 @@ export default function PhotoModal({ onRequestClose, onSave }: ModalProps) {
     const modalMarginBotton = !isKeyboardVisible ? 'mb-20' : '';
 
     const handlePhoto = () => {
-        onSave('photo');
+        updatePhoto('photo')
+        onSave();
     };
 
     return (

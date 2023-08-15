@@ -1,31 +1,35 @@
-import { off } from 'process';
 import React, { ReactNode, useState, useEffect }  from 'react'
 
 interface ModalProps {
     children: ReactNode;
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
-    onSave: (value: string) => void;
-    currentOffer: string
+    onSave: () => void;
+    currentOffer: string;
+    updateOffer: (value: number) => void;
 }
 
-export default function OfferModal({children, onRequestClose, onSave, currentOffer }: ModalProps) {
+export default function OfferModal({ children, onRequestClose, onSave, currentOffer, updateOffer }: ModalProps) {
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const [offer, setOffer] = useState(currentOffer);
 
     const handleAccept = () => {
         const parsedOffer = parseFloat(offer);
-
         if (!isNaN(parsedOffer) && parsedOffer >= 35000) {
-            onSave(offer);
+            onSave();
         } else {
-            console.log("Oferta inválida");
+            setOffer('oferta inválida')
         }
-        onSave(offer);
+        
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setOffer(e.target.value);
+        const inputOffer = e.target.value;
+        setOffer(inputOffer);
+        const parsedInputOffer = parseFloat(inputOffer);
+        if (!isNaN(parsedInputOffer)) {
+            updateOffer(parsedInputOffer);
+        }
     }
 
     useEffect(() => {
@@ -58,7 +62,7 @@ export default function OfferModal({children, onRequestClose, onSave, currentOff
                         type='text' 
                         className='bg-gray-200 text-center'
                         onChange={handleInputChange}
-                        value={offer}
+                        value={offer == '0' ? '' : offer}
                     >
                     </input>
                 </div>

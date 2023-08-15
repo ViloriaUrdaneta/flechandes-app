@@ -7,7 +7,7 @@ export interface Flete {
     fecha: string
     ayudante: string
     oferta: string
-
+    seguro: boolean
 }
 
 export type FletesResponseFromApi = Array<{
@@ -19,4 +19,5 @@ export type FletesResponseFromApi = Array<{
     fecha: string
     ayudante: string
     oferta: string
+    seguro: boolean
 }>

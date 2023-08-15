@@ -23,7 +23,8 @@ const INITIAL_STATE = {
     vehiculo: '',
     fecha: '',
     ayudante: '',
-    oferta: ''
+    oferta: '',
+    seguro: false
 }
 
 const formReducer = (state: FormState['inputValues'], action: FormReducerAction) => {

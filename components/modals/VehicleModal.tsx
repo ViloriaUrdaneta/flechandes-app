@@ -3,12 +3,12 @@ import VehicleButton from '../buttons/VehicleButton';
 
 interface ModalProps {
     onRequestClose: (e: React.MouseEvent<HTMLElement, MouseEvent> ) => void;
-    onSave: (value: string) => void;
+    onSave: () => void;
+    updateVehicle: (value: string) => void;
 }
 
-export default function VehicleModal({ onRequestClose, onSave }: ModalProps) {
+export default function VehicleModal({ onRequestClose, onSave, updateVehicle }: ModalProps) {
 
-    const [vehicle, setVehicle] = useState('');
     const [activeVehicle, setActiveVehicle] = useState('');
 
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -30,11 +30,11 @@ export default function VehicleModal({ onRequestClose, onSave }: ModalProps) {
     const modalMarginBotton = !isKeyboardVisible ? 'mb-20' : '';
 
     const handleAccept = () => {
-        onSave(vehicle);
+        onSave();
     };
 
     const handleVehicleSelect = (selectedVehicle: string) => {
-        setVehicle(selectedVehicle);
+        updateVehicle(selectedVehicle)
         setActiveVehicle(selectedVehicle);
     };
 
