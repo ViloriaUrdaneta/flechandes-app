@@ -30,7 +30,16 @@ export default function AssitantModal({ children, onRequestClose, onSave, update
 
     const handleAssistantButton = (value: string) => {
         setAssitantNumber(value);
-        updateAssistant(value)
+        if(value === '1'){
+            updateAssistant('1 Ayudante')
+        } else if (value === '2'){
+            updateAssistant('2 Ayudantes')
+        }else if (value === '3'){
+            updateAssistant('3 Ayudantes')
+        }else {
+            updateAssistant('Sin ayudantes')
+        }
+        
     };
 
     const handleAccept = () => {
@@ -65,8 +74,8 @@ export default function AssitantModal({ children, onRequestClose, onSave, update
                         3
                     </button>
                     <button 
-                        className='font-bold text-gray-400'
-                        onClick={() => handleAssistantButton('0')}
+                        className={`font-bold ${assitantNumber === '4' ? 'text-black' : 'text-gray-400'}`}
+                        onClick={() => handleAssistantButton('4')}
                     >
                         Yo ayudo
                     </button>

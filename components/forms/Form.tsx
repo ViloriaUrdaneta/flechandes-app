@@ -10,7 +10,6 @@ import AssistantModal from '../modals/AssistantModal';
 import DateModal from '../modals/DateModal';
 import { numberWithDots } from '@/utils/numberWithDots';
 
-
 interface FormProps {
     onNewFlete: (newFlete: Flete) => void
 }
@@ -92,7 +91,7 @@ function Form({onNewFlete}: FormProps) {
                 inputValue: value
             }
         })
-    }
+    };
     const handleModalSave = (
         inputName: string, 
         inputValue: string, 
@@ -142,14 +141,14 @@ function Form({onNewFlete}: FormProps) {
                 <input 
                     onChange={handleChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.origen !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}
                     name='origen' 
                     placeholder='Origen de carga' 
                 />
                 <input 
                     onChange={handleChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.destino !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}   
                     name='destino' 
                     placeholder='Destino de carga' 
                 />
@@ -158,7 +157,7 @@ function Form({onNewFlete}: FormProps) {
                     readOnly 
                     onClick={handleCargoInputChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.carga !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}
                     name='carga' 
                     placeholder='¿Qué transporta?' 
                     value={cargoDescription}
@@ -169,7 +168,7 @@ function Form({onNewFlete}: FormProps) {
                     autoCapitalize="none" 
                     onClick={handlePhotoInputChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.foto !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}
                     name='foto' 
                     placeholder='Agregar imágenes del flete' 
                     value={photo}
@@ -180,10 +179,10 @@ function Form({onNewFlete}: FormProps) {
                     autoCapitalize="none" 
                     onClick={handleVehicleInputChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.vehiculo !== '' ? 'bg-sky-200' : 'bg-slate-50'}`} 
                     name='vehiculo' 
                     placeholder='¿Qué vehiculo necesitas?' 
-                    value={vehicle}
+                    value={vehicle !== '' ? `Vehiculo ${vehicle}` : ''}
                 />
                 <input 
                     onChange={handleChange} 
@@ -191,7 +190,7 @@ function Form({onNewFlete}: FormProps) {
                     autoCapitalize="none" 
                     onClick={handleDateInputChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2' 
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.fecha !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}  
                     name='fecha' 
                     placeholder='¿Cuándo lo necesitas?' 
                     value={date}
@@ -202,7 +201,7 @@ function Form({onNewFlete}: FormProps) {
                     autoCapitalize="none" 
                     onClick={handleAssistantInputChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.ayudante !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}
                     name='ayudante' 
                     placeholder='¿Necesitas ayudante?'
                     value={assistant} 
@@ -213,10 +212,10 @@ function Form({onNewFlete}: FormProps) {
                     autoCapitalize="none" 
                     onClick={handleOfferInputChange} 
                     type='text' 
-                    className='lex items-center w-80 bg-slate-50 rounded-lg shadow-lg p-2'  
+                    className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.oferta !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}
                     name='oferta' 
                     placeholder='Oferta un precio' 
-                    value={offer !== 0 ? numberWithDots(offer) : ''}
+                    value={offer !== 0 ? `$${numberWithDots(offer)}` : ''}
                 />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>

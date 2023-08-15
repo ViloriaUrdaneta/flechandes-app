@@ -50,7 +50,7 @@ export default function DateModal({ children, onRequestClose, onSave, updateDate
                     <Datetime 
                         input={false} 
                         inputProps={{className:'datetime'}}
-                        onChange={(date: string | Moment) => updateDate(date.toString())}
+                        onChange={(date: string | Moment) => updateDate(moment(date).format("DD MMMM, hh:mm a").toString())}
                     />
                 </div>
                 <div className='flex justify-evenly my-6 '>

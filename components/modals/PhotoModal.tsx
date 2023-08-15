@@ -27,7 +27,7 @@ export default function PhotoModal({ onRequestClose, onSave, updatePhoto }: Moda
     const modalMarginBotton = !isKeyboardVisible ? 'mb-20' : '';
 
     const handlePhoto = () => {
-        updatePhoto('photo')
+        //updatePhoto('photo')
         onSave();
     };
 
