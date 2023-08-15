@@ -1,12 +1,26 @@
 import { Flete } from '@/types';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import CancelModal from '../modals/CancelModal';
 
 interface ButtonProps {
     flete: Flete
 }
 
-export default function MainButton({ flete }: ButtonProps) {
+export default function PublicationButton({ flete }: ButtonProps) {
+
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
+  
+  const openModal = () =>{
+    setIsCancelModalOpen(true);
+    document.body.classList.add('overflow-hidden');
+  }
+  const closeModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    document.body.classList.remove('overflow-hidden');
+    setIsCancelModalOpen(false);
+  };
+
   return (
     <div>
       <div className='items-center w-80 bg-gray-100 pb-5 pt-2 rounded-lg shadow-lg justify-center'>
@@ -58,11 +72,17 @@ export default function MainButton({ flete }: ButtonProps) {
         <div className='flex justify-center pt-3'>
           <button  
             className='items-center w-64 text-sky-500 rounded-lg shadow-lg p-2 font-bold bg-white drop-shadow-lg border border-sky-500'
+            onClick={openModal}
           >
             Cancelar
           </button>
         </div>
       </div>
+      { isCancelModalOpen && (
+        <CancelModal
+          onRequestClose={closeModal} 
+        />    
+      )}
     </div>
   )
 }
