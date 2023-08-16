@@ -6,12 +6,17 @@ import Navbar from '@/components/bars/Navbar';
 import Tapbar from '@/components/bars/Tapbar';
 import SecondaryButton from '@/components/buttons/SecondaryButton';
 import PublicationButton from '@/components/buttons/PublicationButton';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
+import { setFlete } from '@/redux/features/fleteSlice';
 
 interface AppState {
     flete: Array<Flete>
 }
 
 export default function FormPage() {
+
+    const fleteList = useAppSelector(state => state.fleteReducer.fletes)
+    const dispatch = useAppDispatch();
 
     const [fletes, setFletes] = useState<AppState["flete"]>([])
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -31,6 +36,7 @@ export default function FormPage() {
     },[])
 
     const handleNewFlete = (newFlete: Flete): void => {
+        dispatch(setFlete(newFlete))
         setFletes(fletes => [...fletes, newFlete])
         console.log(newFlete)
     }
@@ -46,15 +52,14 @@ export default function FormPage() {
                 <Form onNewFlete={handleNewFlete}/>
             </div>
         </>
-    )}
-
+    )};
     const fleteView = () => { return (
         <>
             <h1 className='mt-5'>Icono</h1>
             <h1 className='font-bold mt-3 text-center text-black'>¡Tu flete se publicó exitosamente!</h1>
             <div className='mb-12 mt-5'>
                 <PublicationButton
-                    flete={fletes[0]}
+                    flete={fleteList[0]}
                 />
             </div>
         </>
@@ -63,7 +68,7 @@ export default function FormPage() {
     return (
         <div className='flex min-h-screen bg-gray-300 flex-col items-center content-center p-16'>
             <Navbar/>
-            { fletes.length === 0 ? formView() : fleteView()}
+            { fleteList.length === 0 ? formView() : fleteView()}
             { isKeyboardVisible ? (<></>) : (<Tapbar/>)}
         </div>
     )

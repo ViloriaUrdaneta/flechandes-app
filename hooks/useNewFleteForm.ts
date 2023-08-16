@@ -24,7 +24,8 @@ const INITIAL_STATE = {
     fecha: '',
     ayudante: '',
     oferta: '',
-    seguro: false
+    seguro: false,
+    estado: 'pendiente'
 }
 
 const formReducer = (state: FormState['inputValues'], action: FormReducerAction) => {
