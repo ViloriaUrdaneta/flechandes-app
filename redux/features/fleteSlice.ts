@@ -1,9 +1,5 @@
-import { Flete } from "@/types";
+import { AppState } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
-
-interface AppState {
-    listaFletes: Array<Flete>
-}
 
 const initialState = {
     fletes: <AppState["listaFletes"]>([])
@@ -22,6 +18,3 @@ export const fleteSlice = createSlice({
 export const { setFlete } = fleteSlice.actions;
 
 export default fleteSlice.reducer;
-
-
-//setFletes(fletes => [...fletes, newFlete])

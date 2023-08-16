@@ -11,6 +11,10 @@ export interface Flete {
     estado: string
 }
 
+export interface AppState {
+    listaFletes: Array<Flete>
+}
+
 export type FletesResponseFromApi = Array<{
     origen: string
     destino: string

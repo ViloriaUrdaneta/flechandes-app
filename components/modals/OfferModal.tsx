@@ -18,7 +18,8 @@ export default function OfferModal({ children, onRequestClose, onSave, currentOf
         if (!isNaN(parsedOffer) && parsedOffer >= 35000) {
             onSave();
         } else {
-            setOffer('oferta inválida')
+            setOffer('35000')
+            updateOffer(35000);
         }
         
     };

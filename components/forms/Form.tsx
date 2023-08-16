@@ -239,7 +239,7 @@ function Form({onNewFlete}: FormProps) {
                     className={`lex items-center w-80 rounded-lg shadow-lg p-2 ${inputValues.oferta !== '' ? 'bg-sky-200' : 'bg-slate-50'}`}
                     name='oferta' 
                     placeholder='Oferta un precio' 
-                    value={offer !== 0 ? `$${numberWithDots(offer)}` : ''}
+                    value={offer !== 0 && offer >= 35000 ? `$${numberWithDots(offer)}` : ''}
                 />
                 <div className='flex items-center justify-between'>
                     <p className='font-bold'>Seguro para carga</p>

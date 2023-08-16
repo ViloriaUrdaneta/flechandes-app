@@ -9,16 +9,13 @@ import PublicationButton from '@/components/buttons/PublicationButton';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppDispatch';
 import { setFlete } from '@/redux/features/fleteSlice';
 
-interface AppState {
-    flete: Array<Flete>
-}
+
 
 export default function FormPage() {
 
     const fleteList = useAppSelector(state => state.fleteReducer.fletes)
     const dispatch = useAppDispatch();
 
-    const [fletes, setFletes] = useState<AppState["flete"]>([])
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
     useEffect(() => {
@@ -37,8 +34,6 @@ export default function FormPage() {
 
     const handleNewFlete = (newFlete: Flete): void => {
         dispatch(setFlete(newFlete))
-        setFletes(fletes => [...fletes, newFlete])
-        console.log(newFlete)
     }
 
     const formView = () => { return (
