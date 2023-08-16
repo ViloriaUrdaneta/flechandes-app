@@ -30,7 +30,7 @@ export default function PublicationButton({ flete }: ButtonProps) {
         <div className='text-center mt-3'>
           <h2 className='font-bold text-sky-500'>Datos de tu flete</h2>
         </div>
-        <div className='mt-3 ml-6'>
+        <div className='mt-3 ml-6 text-black'>
           <div className='flex'>
             <p className='ml-3'>00</p>
             <p className='ml-5 text-sm'>{flete.origen}</p>
