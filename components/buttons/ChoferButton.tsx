@@ -14,19 +14,19 @@ export default function MainButton({  }: ButtonProps) {
             <p className='text-xs text-black'>Conductor</p>
           </div>
           <div>
-            <h2 className='font-bold'>Nombre Apellido</h2>
+            <h2 className='font-bold text-black'>Nombre Apellido</h2>
             <button 
-              className='items-center text-sky-500 rounded-lg shadow p-2 px-7 font-bold bg-white drop-shadow-lg border border-sky-500 text-xs'
+              className='items-center text-sky-500 rounded-lg p-2 mt-1 px-7 font-bold bg-white drop-shadow-lg border border-sky-500 text-xs'
             >
               Ver perfil
             </button>
           </div>
           <div className='flex'>
-            <p className='text-sm font-bold'>nota</p>
+            <p className='text-sm font-bold text-black'>nota</p>
             <p>♦</p>
           </div>
         </div>
-        <p className='text-xs m-5'>
+        <p className='text-xs m-5 text-black'>
           Retiramos tus paquetes y los entregamos en la dirección que indiques
         </p>
         <div className='flex m-5'>

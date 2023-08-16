@@ -51,7 +51,7 @@ export default function FormPage() {
     const fleteView = () => { return (
         <>
             <h1 className='mt-5'>Icono</h1>
-            <h1 className='font-bold text-sm mt-3 text-center text-black'>¡Tu flete se publicó exitosamente!</h1>
+            <h1 className='font-bold mt-3 text-center text-black'>¡Tu flete se publicó exitosamente!</h1>
             <div className='mb-12 mt-5'>
                 <PublicationButton
                     flete={fletes[0]}
