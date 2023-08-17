@@ -18,11 +18,13 @@ export default function MyPublications() {
           <SecondaryButton>Fletes</SecondaryButton>
           <SecondaryButton>Mudanzas</SecondaryButton>
         </div>
-        <div className='mb-12 mt-5'>
-          <CancelPublicationButton
-              flete={fleteList[0]}
-            />
-        </div>
+        { fleteList.length === 0 ? 
+          <div className='mb-12 mt-5'>
+            <CancelPublicationButton
+                flete={fleteList[0]}
+              />
+          </div> : <p>No hay publicaciones</p>}
+        
       <Tapbar/>
     </main>
   )
