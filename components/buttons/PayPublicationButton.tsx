@@ -12,7 +12,7 @@ export default function CancelPublicationButton({ flete }: ButtonProps) {
     <div>
       <div className='items-center w-80 bg-gray-100 pb-5 pt-2 rounded-lg shadow-lg justify-center'>
         <div className='ml-6 mt-3'>
-          <h2 className='font-bold text-red'>Flete cancelado</h2>
+          <h2 className='font-bold text-sky-500'>Flete</h2>
         </div>
         <div className='mt-3 ml-6 text-black'>
           <div className='flex'>
@@ -43,15 +43,6 @@ export default function CancelPublicationButton({ flete }: ButtonProps) {
             <p className='ml-3'>00</p>
             <p className='ml-5 text-sm'>${flete.oferta}</p>
           </div>
-        </div>
-        <div className='flex justify-center pt-5'>
-          <Link href={'/publicar'}>
-            <button  
-              className='items-center w-64 rounded-lg shadow-lg p-2 font-semibold bg-sky-500 text-white drop-shadow-lg'
-            >
-              Volver a publicar
-            </button>
-          </Link>
         </div>
       </div>
     </div>

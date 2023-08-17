@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, {  } from 'react';
 
 interface ButtonProps {
@@ -45,11 +46,13 @@ export default function MainButton({  }: ButtonProps) {
           >
             Cancelar
           </button>
-          <button 
-            className='rounded-lg bg-sky-500 px-10 py-2 my-1 text-white font-semibold'
-          >
-            Aceptar
-          </button>
+          <Link href={'/pagar'}>
+            <button 
+              className='rounded-lg border-2 border-sky-500 bg-sky-500 px-10 py-2 my-1 text-white font-semibold'
+            >
+              Aceptar
+            </button>
+          </Link>
         </div>
       </div>
     </div>

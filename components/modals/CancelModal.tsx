@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { ReactNode, useState, useEffect }  from 'react'
 
 interface ModalProps {
@@ -44,11 +45,13 @@ export default function PhotoModal({ onRequestClose }: ModalProps) {
                     </button>
                 </div>
                 <div className='flex justify-center py-3'>
-                    <button  
-                        className='items-center w-64 text-sky-500 rounded-lg shadow-lg font-semibold  p-2 bg-white drop-shadow-lg border border-sky-500'
-                    >
-                        Sí, Cancelar
-                    </button>
+                    <Link href={'/mispublicaciones'}>
+                        <button  
+                            className='items-center w-64 text-sky-500 rounded-lg shadow-lg font-semibold  p-2 bg-white drop-shadow-lg border border-sky-500'
+                        >
+                            Sí, Cancelar
+                        </button>
+                    </Link>
                 </div>
                 <div className='flex justify-center pt-2'>
                     <hr className='text-center border-t-4 rounded-full w-24 border-red mb-2'/>

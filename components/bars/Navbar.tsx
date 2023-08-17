@@ -9,16 +9,27 @@ export default function Navbar() {
 
     let location = ''
 
-    if(pathname === '/'){
-        location = 'Inicio'
-    }else if(pathname === '/publicar'){
-        location = 'Publicar'
-    } else if(pathname === '/perfil'){
-        location = 'Perfil'
-    }  else if(pathname === '/fleterosdisponibles'){
-        location = 'Fleteros Disponibles'
+    switch (pathname){
+        case '/':
+            location = 'Inicio';
+            break;
+        case '/publicar':
+            location = 'Publicar';
+            break;
+        case '/perfil':
+            location = 'Perfil';
+            break;
+        case '/fleterosdisponibles':
+            location = 'Fleteros Disponibles';
+            break;
+        case '/mispublicaciones':
+            location = 'Mis Publicaciones';
+            break;
+        case '/pagar':
+            location = 'Pagar';
+            break;
     }
-   
+
 
     return (
         <div>
