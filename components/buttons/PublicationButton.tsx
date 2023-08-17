@@ -5,9 +5,10 @@ import CancelModal from '../modals/CancelModal';
 
 interface ButtonProps {
     flete: Flete
+    tapbarInvisible: (value: boolean) => void
 }
 
-export default function PublicationButton({ flete }: ButtonProps) {
+export default function PublicationButton({ flete, tapbarInvisible }: ButtonProps) {
 
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
@@ -15,10 +16,12 @@ export default function PublicationButton({ flete }: ButtonProps) {
   const openModal = () =>{
     setIsCancelModalOpen(true);
     document.body.classList.add('overflow-hidden');
+    tapbarInvisible(true)
   }
   const closeModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     document.body.classList.remove('overflow-hidden');
     setIsCancelModalOpen(false);
+    tapbarInvisible(false)
   };
 
   return (

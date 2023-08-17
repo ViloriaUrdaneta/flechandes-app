@@ -16,6 +16,8 @@ export default function FormPage() {
     const fleteList = useAppSelector(state => state.fleteReducer.fletes)
     const dispatch = useAppDispatch();
 
+    const [isTapbarInvisible, setIsTapbarInvisible] = useState(false);
+
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
     useEffect(() => {
@@ -55,6 +57,7 @@ export default function FormPage() {
             <div className='mb-12 mt-5'>
                 <PublicationButton
                     flete={fleteList[0]}
+                    tapbarInvisible={setIsTapbarInvisible}
                 />
             </div>
         </>
@@ -64,7 +67,7 @@ export default function FormPage() {
         <div className='flex min-h-screen bg-gray-300 flex-col items-center content-center p-16'>
             <Navbar/>
             { fleteList.length === 0 ? formView() : fleteView()}
-            { isKeyboardVisible ? (<></>) : (<Tapbar/>)}
+            { isKeyboardVisible || isTapbarInvisible ? (<></>) : (<Tapbar/>)}
         </div>
     )
 }

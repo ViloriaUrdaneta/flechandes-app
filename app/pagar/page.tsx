@@ -12,11 +12,12 @@ export default function Pay() {
   return (
     <main className="flex min-h-screen bg-gray-300 flex-col items-center content-center gap-4 p-24">
       <Navbar/>
-        <div className='mb-5 mt-5'>
-          <PayPublicationButton
+        { fleteList.length !== 0 ? 
+          <div className='mb-12 mt-5'>
+            <PayPublicationButton
               flete={fleteList[0]}
-          />
-        </div>
+            />
+          </div> : <p>No hay publicaciones</p>}
       <Tapbar/>
     </main>
   )
